@@ -36,17 +36,20 @@ export async function createConfigFile(answers) {
 
   const bundlerConfig = {
     browserify: answers.configLanguage === 'JavaScript' ? `
-const { defineConfig } = require('cypress');
-const preprocessor = require("@badeball/cypress-cucumber-preprocessor");
-const browserify = require("@badeball/cypress-cucumber-preprocessor/browserify");
+const { defineConfig } = require("cypress");
+const browserify = require("@cypress/browserify-preprocessor");
+const { addCucumberPreprocessorPlugin } = require("@badeball/cypress-cucumber-preprocessor");
+const { preprendTransformerToOptions } = require("@badeball/cypress-cucumber-preprocessor/browserify");
 
 async function setupNodeEvents(on, config) {
-  await preprocessor.addCucumberPreprocessorPlugin(on, config);
+  await addCucumberPreprocessorPlugin(on, config);
 
-  on('file:preprocessor', browserify.default(config));
+  on(
+    "file:preprocessor",
+    browserify(preprendTransformerToOptions(config, browserify.defaultOptions))
+  );
 
   return config;
-
 }
 
 module.exports = defineConfig({
@@ -57,23 +60,26 @@ module.exports = defineConfig({
     },
 });
     ` : `
-import { defineConfig } from 'cypress';
+import browserify from "@cypress/browserify-preprocessor";
 import { addCucumberPreprocessorPlugin } from "@badeball/cypress-cucumber-preprocessor";
-import browserify from "@badeball/cypress-cucumber-preprocessor/browserify";
+import { preprendTransformerToOptions } from "@badeball/cypress-cucumber-preprocessor/browserify";
 
 async function setupNodeEvents(
   on: Cypress.PluginEvents,
-  config: Cypress.PluginConfigOptions
+  config: Cypress.PluginConfigOptions,
 ): Promise<Cypress.PluginConfigOptions> {
+  
   await addCucumberPreprocessorPlugin(on, config);
 
   on(
     "file:preprocessor",
-    browserify(config, {
+    browserify({
+      ...preprendTransformerToOptions(config, browserify.defaultOptions),
       typescript: require.resolve("typescript"),
-    })
+    }),
   );
 
+  
   return config;
 }
 

@@ -30,8 +30,12 @@ export async function createPackageJsonFile(answers) {
     } else if (answers.bundler === 'webpack') {
       packageJsonContent.devDependencies["@cypress/webpack-preprocessor"] = "latest";
       packageJsonContent.devDependencies["webpack"] = "latest"; // Adding webpack itself as a dependency
-    }
-  }
+    } 
+  } else if (!(answers.testDesign) && (answers.lintSetup)) {
+    packageJsonContent.devDependencies["eslint"] = "latest";
+    packageJsonContent.devDependencies["eslint-plugin-cypress"] = "latest";
+  } 
+  
   if (answers.testDesign && answers.reportChoice) {
     // let packageJsonObject = JSON.parse(packageJsonContent);
     packageJsonContent["cypress-cucumber-preprocessor"] = {

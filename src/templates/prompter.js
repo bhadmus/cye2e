@@ -44,6 +44,12 @@ Options:
       default: "JavaScript",
     },
     {
+      type: "confirm",
+      name: "lintSetup",
+      message: "Do you want to setup Eslint?",
+      default: false,
+    },
+    {
       type: "input",
       name: "baseUrl",
       message: "What is the base URL for your tests?",

@@ -145,7 +145,7 @@ export async function createConfigurationFile(answers, configFilePath) {
 
     // Create tsconfig.json if TypeScript is selected
     if (answers.configLanguage === 'TypeScript') {
-        const tsConfigFilePath = path.join(process.cwd(), 'tsconfig.json');
+        const tsConfigFilePath = path.join(process.cwd(), 'cypress', 'tsconfig.json');
         const tsConfigContent = `
     {
       "compilerOptions": {

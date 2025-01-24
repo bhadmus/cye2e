@@ -6,6 +6,7 @@ import path from 'path';
 export async function createConfigFile(answers) {
   const configFileName = answers.configLanguage === 'JavaScript' ? 'cypress.config.js' : 'cypress.config.ts';
   const configFilePath = path.join(process.cwd(), configFileName);
+  const eslintFilePath = path.join(process.cwd(), 'eslint.config.js');
 
   const reporterConfig = {
     mochawesome: `
@@ -285,4 +286,23 @@ export default defineConfig({
 
   await fs.outputFile(configFilePath, configContent);
   console.log(`Created ${configFileName}`);
+
+  const lintConfig = `
+import pluginCypress from 'eslint-plugin-cypress/flat'
+export default [
+  pluginCypress.configs.recommended,
+  {
+    rules: {
+      'cypress/no-unnecessary-waiting': 'warn'
+    }
+  }
+]
+`;
+
+  if (answers.lintSetup) {
+    await fs.outputFile(eslintFilePath, lintConfig);
+    console.log(`Eslint has been configured and is located at ${eslintFilePath}`);
+  }
 }
+
+

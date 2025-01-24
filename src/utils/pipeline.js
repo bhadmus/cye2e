@@ -63,6 +63,9 @@ jobs:
         await fs.writeFile(githubFilePath, pipelineConfigContent);
     }
   }
-
-  console.log(`Created ${answers.versionControl} config file`);
+ if (answers.versionControl === undefined){
+  console.log(` `);
+ }else{
+  console.log(`Pipeline config for ${answers.versionControl} has been created successfully.`);
+ }
 }

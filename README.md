@@ -26,6 +26,11 @@ You can create a cypress Template project that you can easily edit to suit your 
 |:--:| 
 | *Cypress Config with no BDD or reporter selected* |
 
+
+| ![TDD and Eslint](shots/cy-e2e-17.png) |
+|:--:| 
+| *Cypress Config with no BDD or reporter selected but eslint selected* |
+
 | ![Project-Structure](shots/cy-e2e-11.jpg) |
 |:--:| 
 | *Cypress Project Created* |

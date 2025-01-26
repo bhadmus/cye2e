@@ -1,6 +1,6 @@
 {
   "name": "cye2e",
-  "version": "2.0.5",
+  "version": "2.0.7",
   "type": "module",
   "description": "",
   "main": "index.js",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bhadmus/cy-config.git"
+    "url": "git+https://github.com/bhadmus/cye2e.git"
   },
   "keywords": [
     "cypress",
@@ -22,9 +22,9 @@
   "author": "Ademola Bhadmus",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bhadmus/cy-config/issues"
+    "url": "https://github.com/bhadmus/cye2e/issues"
   },
-  "homepage": "https://github.com/bhadmus/cy-config#readme",
+  "homepage": "https://github.com/bhadmus/cye2e#readme",
   "dependencies": {
     "inquirer": "^9.3.4",
     "fs-extra": "^10.0.0",

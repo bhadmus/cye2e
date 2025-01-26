@@ -82,6 +82,7 @@ export async function createPackageJsonFile(answers) {
     packageJsonContent.devDependencies["eslint-plugin-cypress"] = "latest";
     if(answers.safariSupport){
       packageJsonContent.devDependencies["playwright-webkit"] = "latest";
+      console.log('For Linux users run:  npx playwright install-deps webkit');
       if(answers.testDesign){
         packageJsonContent.devDependencies["@badeball/cypress-cucumber-preprocessor"] = "latest";
 
@@ -136,6 +137,7 @@ export async function createPackageJsonFile(answers) {
   } else {
     if(answers.safariSupport){
       packageJsonContent.devDependencies["playwright-webkit"] = "latest";
+      console.log('For Linux users run:  npx playwright install-deps webkit');
       if(answers.testDesign){
         packageJsonContent.devDependencies["@badeball/cypress-cucumber-preprocessor"] = "latest";
 

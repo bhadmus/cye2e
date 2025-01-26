@@ -31,9 +31,6 @@ export async function createPackageJsonFile(answers) {
       packageJsonContent.devDependencies["@cypress/webpack-preprocessor"] = "latest";
       packageJsonContent.devDependencies["webpack"] = "latest"; // Adding webpack itself as a dependency
     } 
-  } else if (!(answers.testDesign) && (answers.lintSetup)) {
-    packageJsonContent.devDependencies["eslint"] = "latest";
-    packageJsonContent.devDependencies["eslint-plugin-cypress"] = "latest";
   } 
   
   if (answers.testDesign && answers.reportChoice) {
@@ -79,6 +76,118 @@ export async function createPackageJsonFile(answers) {
     }
   }
 
+  // Add safari browser support and eslint to BDD and reporter
+  if (answers.lintSetup){
+    packageJsonContent.devDependencies["eslint"] = "latest";
+    packageJsonContent.devDependencies["eslint-plugin-cypress"] = "latest";
+    if(answers.safariSupport){
+      packageJsonContent.devDependencies["playwright-webkit"] = "latest";
+      if(answers.testDesign){
+        packageJsonContent.devDependencies["@badeball/cypress-cucumber-preprocessor"] = "latest";
+
+        switch(answers.bundler){
+          case 'webpack':
+            packageJsonContent.devDependencies["@cypress/webpack-preprocessor"] = "latest";
+            packageJsonContent.devDependencies["webpack"] = "latest";
+            break;
+          case 'esbuild':
+            packageJsonContent.devDependencies["@bahmutov/cypress-esbuild-preprocessor"] = "latest";
+            break;
+          case 'browserify':
+            packageJsonContent.devDependencies["@cypress/browserify-preprocessor"] = "latest";
+
+        }
+      } else if (answers.testDesign && answers.reportChoice) {
+        // let packageJsonObject = JSON.parse(packageJsonContent);
+        packageJsonContent["cypress-cucumber-preprocessor"] = {
+          "json": {
+            "enabled": true,
+            "output": "reports/json/results.json"
+          }
+        };
+        await fs.writeFile(packageJsonPath, JSON.stringify(packageJsonContent, null, 2));
+    
+        switch (answers.reporter) {
+          case 'badeball':
+            packageJsonContent["cypress-cucumber-preprocessor"]["html"] = {
+              "enabled": true,
+              "output": "reports/html/results.html"
+            }
+            break
+          case 'multipleCucumber':
+            packageJsonContent.devDependencies["multiple-cucumber-html-reporter"] = "latest";
+    
+        }
+    
+    
+      }else if (answers.reportChoice) {
+        switch (answers.reporter) {
+          case 'mochawesome':
+            packageJsonContent.devDependencies["cypress-mochawesome-reporter"] = "^3.8.2";
+            break
+          case 'allure':
+            packageJsonContent.devDependencies["allure-commandline"] = "^2.29.0";
+            packageJsonContent.devDependencies["allure-cypress"] = "^2.15.1";
+    
+        }
+      }
+    }
+
+  } else {
+    if(answers.safariSupport){
+      packageJsonContent.devDependencies["playwright-webkit"] = "latest";
+      if(answers.testDesign){
+        packageJsonContent.devDependencies["@badeball/cypress-cucumber-preprocessor"] = "latest";
+
+        switch(answers.bundler){
+          case 'webpack':
+            packageJsonContent.devDependencies["@cypress/webpack-preprocessor"] = "latest";
+            packageJsonContent.devDependencies["webpack"] = "latest";
+            break;
+          case 'esbuild':
+            packageJsonContent.devDependencies["@bahmutov/cypress-esbuild-preprocessor"] = "latest";
+            break;
+          case 'browserify':
+            packageJsonContent.devDependencies["@cypress/browserify-preprocessor"] = "latest";
+
+        }
+      } else if (answers.testDesign && answers.reportChoice) {
+        // let packageJsonObject = JSON.parse(packageJsonContent);
+        packageJsonContent["cypress-cucumber-preprocessor"] = {
+          "json": {
+            "enabled": true,
+            "output": "reports/json/results.json"
+          }
+        };
+        await fs.writeFile(packageJsonPath, JSON.stringify(packageJsonContent, null, 2));
+    
+        switch (answers.reporter) {
+          case 'badeball':
+            packageJsonContent["cypress-cucumber-preprocessor"]["html"] = {
+              "enabled": true,
+              "output": "reports/html/results.html"
+            }
+            break
+          case 'multipleCucumber':
+            packageJsonContent.devDependencies["multiple-cucumber-html-reporter"] = "latest";
+    
+        }
+    
+    
+      }else if (answers.reportChoice) {
+        switch (answers.reporter) {
+          case 'mochawesome':
+            packageJsonContent.devDependencies["cypress-mochawesome-reporter"] = "^3.8.2";
+            break
+          case 'allure':
+            packageJsonContent.devDependencies["allure-commandline"] = "^2.29.0";
+            packageJsonContent.devDependencies["allure-cypress"] = "^2.15.1";
+    
+        }
+      }
+    }
+
+  }
   // Write package.json
   await fs.writeJson(packageJsonPath, packageJsonContent, { spaces: 2 });
 

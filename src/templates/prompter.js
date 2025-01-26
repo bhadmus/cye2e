@@ -4,7 +4,7 @@ import inquirer from "inquirer";
 
 export async function collectInfo() {
 
-  const version = "2.0.5"; 
+  const version = "2.0.7"; 
 
   // Check command-line arguments for --version or --help
   const args = process.argv.slice(2);
@@ -71,6 +71,12 @@ Options:
       type: "confirm",
       name: "pipelineConfig",
       message: "Do you want to setup a pipeline?",
+      default: false,
+    },
+    {
+      type: "confirm",
+      name: "safariSupport",
+      message: "Do you want to setup Safari support?",
       default: false,
     },
     {

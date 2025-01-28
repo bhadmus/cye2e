@@ -4,7 +4,7 @@ import inquirer from "inquirer";
 
 export async function collectInfo() {
 
-  const version = "2.0.8"; 
+  const version = "2.0.9"; 
 
   // Check command-line arguments for --version or --help
   const args = process.argv.slice(2);
@@ -25,15 +25,26 @@ Options:
     process.exit(0);
   }
 
-  console.log(
-    "\u{1F31F} \u{1F31F} \u{1F31F} \u{1F31F} \u{1F31F} \u{1F31F} \u{1F31F} \u{1F31F} \u{1F31F} \u{1F31F}"
-  );
-  console.log("\n");
-  console.log("\u{1F31F} Cypress E2E Helper Bot  \u{1F31F}");
-  console.log("\n");
-  console.log(
-    "\u{1F31F} \u{1F31F} \u{1F31F} \u{1F31F} \u{1F31F} \u{1F31F} \u{1F31F} \u{1F31F} \u{1F31F} \u{1F31F}"
-  );
+  // console.log(
+  //   "\u{1F31F} \u{1F31F} \u{1F31F} \u{1F31F} \u{1F31F} \u{1F31F} \u{1F31F} \u{1F31F} \u{1F31F} \u{1F31F}"
+  // );
+  // console.log("\n");
+  // console.log("\u{1F31F} Cypress E2E Helper Bot  \u{1F31F}");
+  // console.log("\n");
+  // console.log(
+  //   "\u{1F31F} \u{1F31F} \u{1F31F} \u{1F31F} \u{1F31F} \u{1F31F} \u{1F31F} \u{1F31F} \u{1F31F} \u{1F31F}"
+  // );
+
+  console.log('\n')
+  console.log('\n')
+  console.log(' ██████╗██╗   ██╗███████╗██████╗ ███████╗')
+  console.log('██╔════╝╚██╗ ██╔╝██╔════╝╚════██╗██╔════╝')
+  console.log('██║      ╚████╔╝ █████╗   █████╔╝█████╗  ')
+console.log('██║       ╚██╔╝  ██╔══╝  ██╔═══╝ ██╔══╝  ')
+console.log('╚██████╗   ██║   ███████╗███████╗███████╗')
+ console.log(' ╚═════╝   ╚═╝   ╚══════╝╚══════╝╚══════╝')
+console.log('\n')
+console.log('\n')
 
   const answers = await inquirer.prompt([
     {

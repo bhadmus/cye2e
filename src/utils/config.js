@@ -62,6 +62,7 @@ module.exports = defineConfig({
     },
 });
     ` : `
+import { defineConfig } from "cypress";
 import browserify from "@cypress/browserify-preprocessor";
 import { addCucumberPreprocessorPlugin } from "@badeball/cypress-cucumber-preprocessor";
 import { preprendTransformerToOptions } from "@badeball/cypress-cucumber-preprocessor/browserify";
@@ -311,6 +312,7 @@ module.exports = defineConfig({
     },
 });
     ` : `
+import { defineConfig } from "cypress";
 import browserify from "@cypress/browserify-preprocessor";
 import { addCucumberPreprocessorPlugin } from "@badeball/cypress-cucumber-preprocessor";
 import { preprendTransformerToOptions } from "@badeball/cypress-cucumber-preprocessor/browserify";

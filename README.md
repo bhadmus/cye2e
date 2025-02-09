@@ -56,3 +56,7 @@ You can create a cypress Template project that you can easily edit to suit your 
 ## Support
 
 [Issues](https://github.com/bhadmus/cy-config/issues)
+
+> [!NOTE]
+> The [Browserify](https://github.com/badeball/cypress-cucumber-preprocessor/issues/1273) has an issue
+> Until is stable, use esbuild, or webpack

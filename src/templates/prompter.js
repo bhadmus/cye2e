@@ -4,7 +4,7 @@ import inquirer from "inquirer";
 
 export async function collectInfo() {
 
-  const version = "2.1.0"; 
+  const version = "2.1.1"; 
 
   // Check command-line arguments for --version or --help
   const args = process.argv.slice(2);
@@ -110,8 +110,8 @@ console.log('\n')
         type: "list",
         name: "bundler",
         message: "Which bundler do you prefer?",
-        choices: ["browserify", "esbuild", "webpack"],
-        default: "browserify",
+        choices: ["esbuild", "webpack"],
+        default: "esbuild",
       },
     ]);
     answers.bundler = bundlerAnswer.bundler;
